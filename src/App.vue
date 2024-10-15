@@ -36,8 +36,11 @@ export default {
     components: {
         TheHeader
     },
-    beforeMount() {
-        this.$store.dispatch('autoLogIn');
+    async beforeMount() {
+        this.$store.dispatch('loadCoaches');
+        await this.$store.dispatch('autoLogIn');
+        await this.$store.dispatch('loadRequests');
+
     },
     computed: {
         didAutoLogOut() {

@@ -8,6 +8,14 @@ export default {
         coach() {
             return this.$store.getters.coach;
         },
+        hasRequests() {
+            const requests = this.$store.getters.requests[this.$store.getters.userId];
+            return requests && requests.length > 0;
+        },
+        userRequests() {
+            console.log(this.$store.getters.requests[this.$store.getters.userId]);
+            return this.$store.getters.requests[this.$store.getters.userId];
+        }
     },
     methods: {
         coachName(coachID) {
@@ -43,9 +51,10 @@ export default {
                         <h2>Coach {{ coachName($store.getters.userId) }}</h2>
                     </template>
                     <template #default>
-                        <ul>
-                            <request-item v-for="[key, request] in Object.entries($store.getters.requests)" :key="key" :request="request"></request-item>
+                        <ul v-if="hasRequests">
+                            <request-item v-for="(request, index) in userRequests" :key="index" :request="request"></request-item>
                         </ul>
+                        <h1 v-else>All Caught up on requests</h1>
                     </template>
                 </base-card>
             </li>
