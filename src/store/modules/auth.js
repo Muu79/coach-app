@@ -1,5 +1,6 @@
 let timer;
-const key = await fetch('https://vue-coach-demo.netlify.app/.netlify/functions/firebaseKey')
+const key = fetch('https://vue-coach-demo.netlify.app/.netlify/functions/firebaseKey').then(res => res.json()).then(data => data);
+console.log(key);
 const authModule = {
   state() {
     return {
