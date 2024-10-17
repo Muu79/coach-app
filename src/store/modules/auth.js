@@ -1,4 +1,5 @@
 let timer;
+const key = await fetch('https://vue-coach-demo.netlify.app/.netlify/functions/firebaseKey')
 const authModule = {
   state() {
     return {
@@ -61,10 +62,10 @@ const authModule = {
     async auth(context, payload) {
       const mode = payload.mode;
       let url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBQROeicVIYDR8yC_uhO65DsPuab2NMI-4';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + key;
       if (mode === 'signup') {
         url =
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBQROeicVIYDR8yC_uhO65DsPuab2NMI-4';
+          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + key;
       }
       const res = await fetch(url, {
         method: 'POST',
